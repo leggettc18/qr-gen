@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
         <!-- Styles -->
-        <link rel="stylesheet" href="{{ mix('css/app.css') }}">
+        <!-- <link rel="stylesheet" href="{{ mix('css/app.css') }}"> -->
 
         <!-- Scripts -->
         @routes
@@ -19,7 +19,7 @@
                 $manifest = json_decode(file_get_contents(public_path('dist/manifest.json')), true);
             @endphp
             <script type="module" src="/dist/(( $manifest['resources/js/app.ts']['file'] }}"></script>
-            {{-- <link rel="stylesheet" href="/dist/{{ $manifest['resources/js/app.ts']['css'][0] }}"> --}}
+            <link rel="stylesheet" href="/dist/{{ $manifest['resources/js/app.ts']['css'][0] }}">
         @else
             <script type="module" src="http://localhost:3030/@vite/client"></script>
             <script type="module" src="http://localhost:3030/resources/js/app.ts"></script>
