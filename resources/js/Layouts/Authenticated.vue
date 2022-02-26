@@ -12,8 +12,8 @@ const showingNavigationDropdown = ref(false);
 
 <template>
   <div>
-    <div class="min-h-screen bg-gray-100 dark:bg-emerald-900">
-      <nav class="bg-white dark:bg-emerald-900 border-b border-gray-100 dark:border-gray-800">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+      <nav class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
         <!-- Primary Navigation Menu -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div class="flex justify-between h-16">
@@ -42,7 +42,7 @@ const showingNavigationDropdown = ref(false);
                     <span class="inline-flex rounded-md">
                       <button
                         type="button"
-                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-emerald-800 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-gray-800 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                       >
                         {{ $page.props.auth.user.name }}
                         <svg
@@ -72,7 +72,7 @@ const showingNavigationDropdown = ref(false);
             <div class="-mr-2 flex items-center sm:hidden">
               <button
                 @click="showingNavigationDropdown = ! showingNavigationDropdown"
-                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-emerald-500 focus:outline-none focus:bg-gray-100 dark:focus:bg-emerald-500 focus:text-gray-500 transition duration-150 ease-in-out"
+                class="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700 focus:text-gray-500 transition duration-150 ease-in-out"
               >
                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                   <path
@@ -108,7 +108,7 @@ const showingNavigationDropdown = ref(false);
           </div>
 
           <!-- Responsive Settings Options -->
-          <div class="pt-4 pb-1 border-t border-gray-200 dark:border-emerald-800">
+          <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-800">
             <div class="px-4">
               <div
                 class="font-medium text-base text-gray-800 dark:text-gray-500"
@@ -126,7 +126,7 @@ const showingNavigationDropdown = ref(false);
       </nav>
 
       <!-- Page Heading -->
-      <header class="bg-white shadow dark:bg-emerald-700" v-if="$slots.header">
+      <header class="bg-white shadow dark:bg-gray-700" v-if="$slots.header">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
           <slot name="header" />
         </div>
