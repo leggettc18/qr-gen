@@ -1,6 +1,14 @@
 <script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
+import { ref } from "vue-demi";
 import VueQrCode from "vue-qrcode";
+
+var qrlinkcurrent = ref("");
+var qrlinknew = ref("");
+
+const updateQrLink = () => {
+  qrlinkcurrent.value = qrlinknew.value;
+};
 
 defineProps({
   canLogin: Boolean,
@@ -35,7 +43,13 @@ defineProps({
     </div>
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-      <VueQrCode value="https://chrisleggett.me" />
+      <VueQrCode :value="qrlinkcurrent" class="m-3" />
+      <input type="text" v-model="qrlinknew" />
+      <button
+        @click="updateQrLink()"
+        class="bg-indigo-200 dark:bg-gray-600 text-indigo-700 dark:text-gray-200 p-3 m-3 border rounded-md b-2 border-gray-500"
+      >Update</button>
+
       <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
         <svg
           viewBox="0 0 651 192"
