@@ -1,5 +1,6 @@
 <script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
+import VueQrCode from "vue-qrcode";
 
 defineProps({
   canLogin: Boolean,
@@ -34,6 +35,7 @@ defineProps({
     </div>
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
+      <VueQrCode value="https://chrisleggett.me" />
       <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
         <svg
           viewBox="0 0 651 192"
