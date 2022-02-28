@@ -1,5 +1,7 @@
 <script setup>
 import { Head, Link } from "@inertiajs/inertia-vue3";
+import Button from "@/Components/Button.vue";
+import Input from "@/Components/Input.vue";
 import { ref } from "vue-demi";
 import VueQrCode from "vue-qrcode";
 
@@ -44,11 +46,8 @@ defineProps({
 
     <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
       <VueQrCode :value="qrlinkcurrent" class="m-3" />
-      <input type="text" v-model="qrlinknew" />
-      <button
-        @click="updateQrLink()"
-        class="bg-indigo-200 dark:bg-gray-600 text-indigo-700 dark:text-gray-200 p-3 m-3 border rounded-md b-2 border-gray-500"
-      >Update</button>
+      <Input type="text" v-model="qrlinknew" />
+      <Button type="button" @click="updateQrLink()">Update</Button>
 
       <div class="flex justify-center pt-8 sm:justify-start sm:pt-0">
         <svg
