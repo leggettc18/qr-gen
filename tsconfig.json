@@ -12,6 +12,11 @@
             "esnext",
             "dom"
         ],
+        "paths": {
+            "@/*": [
+                "resources/js/*"
+            ]
+        },
         "plugins": [
             {
                 "name": "@vuedx/typescript-plugin-vue"
