@@ -57,7 +57,7 @@ const props = defineProps<{
         </div>
 
         <div class="max-w-6xl mx-auto sm:px-6 lg:px-8">
-            <VueQrious v-if="qrlinkcurrent != ''" :value="qrlinkcurrent"/>
+            <VueQrious v-show="qrlinkcurrent != ''" :value="qrlinkcurrent"/>
             <Input type="text" v-model="qrlinknew" />
             <Button type="button" @click="updateQrLink()">Update</Button>
 
