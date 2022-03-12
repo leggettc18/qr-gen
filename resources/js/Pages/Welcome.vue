@@ -5,7 +5,7 @@ import Input from "../Components/Input.vue";
 import { computed, ref } from "vue-demi";
 import VueQrious from "vue-qrious";
 import { useRoute } from "../Composables/route";
-import { ErrorBag, Errors, Page, PageProps } from "@inertiajs/inertia";
+import { Page, PageProps } from "@inertiajs/inertia";
 
 interface IPageProps extends Page<PageProps> {
     auth: {
