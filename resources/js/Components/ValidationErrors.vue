@@ -1,8 +1,13 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 import { usePage } from '@inertiajs/inertia-vue3';
+import { ErrorBag, Errors, Page, PageProps } from '@inertiajs/inertia';
 
-const errors = computed(() => usePage().props.value.errors);
+interface IPageProps extends Page<PageProps> {
+    errors: Errors & ErrorBag;
+}
+
+const errors = computed(() => usePage<IPageProps>().props.value.errors);
 
 const hasErrors = computed(() => Object.keys(errors.value).length > 0);
 </script>
