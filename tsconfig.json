@@ -14,7 +14,7 @@
         ],
         "paths": {
             "@/*": [
-                "/resources/js/*"
+                "./resources/js/*"
             ]
         },
         "plugins": [
