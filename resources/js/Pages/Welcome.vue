@@ -58,9 +58,10 @@ const props = defineProps<{
         <div v-if="canLogin" class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
             <Link
                 v-if="user"
-                :href="route('dashboard')"
+                :href="route('logout')"
+                method="post"
                 class="text-sm text-gray-700 underline"
-            >Dashboard</Link>
+            >Log Out</Link>
 
             <template v-else>
                 <Link :href="route('login')" class="text-sm text-gray-700 underline">Log in</Link>
