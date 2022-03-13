@@ -85,7 +85,11 @@ const props = defineProps<{
                             <BreezeInput type="text" v-model="qrlinknew" />
                             <BreezeButton type="button" @click="updateQrLink()">Update</BreezeButton>
                         </div>
-                        <VueQrious :value="qrlinkcurrent" class="border-4 border-gray-600 rounded" />
+                        <VueQrious
+                            v-show="qrlinkcurrent != ''"
+                            :value="qrlinkcurrent"
+                            class="border-4 border-gray-600 rounded"
+                        />
                     </div>
                 </div>
                 <div class="sm:p-6 lg:p-8 bg-gray-800 rounded" v-if="!user">
