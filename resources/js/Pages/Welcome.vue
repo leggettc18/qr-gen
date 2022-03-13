@@ -60,24 +60,24 @@ const props = defineProps<{
                 v-if="user"
                 :href="route('logout')"
                 method="post"
-                class="text-sm text-gray-700 underline"
+                class="text-sm text-gray-700 dark:text-gray-500 underline"
             >Log Out</Link>
 
             <template v-else>
-                <Link :href="route('login')" class="text-sm text-gray-700 underline">Log in</Link>
+                <Link :href="route('login')" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</Link>
 
                 <Link
                     v-if="canRegister"
                     :href="route('register')"
-                    class="ml-4 text-sm text-gray-700 underline"
+                    class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline"
                 >Register</Link>
             </template>
         </div>
 
         <div class="prose flex flex-col items-center min-w-full">
-            <h1 class="text-gray-200">QR Gen</h1>
-            <div class="flex justify-around min-w-full">
-                <div class="sm:p-6 lg:p-8 bg-gray-800 rounded">
+            <h1 class="dark:text-gray-200">QR Gen</h1>
+            <div class="flex flex-col lg:flex-row justify-around min-w-full">
+                <div class="sm:p-6 lg:p-8 bg-gray-200 dark:bg-gray-800 rounded m-4 p-4">
                     <div class="flex flex-col space-y-3 h-full items-center justify-around">
                         <h2
                             class="dark:text-gray-200"
@@ -93,7 +93,7 @@ const props = defineProps<{
                         />
                     </div>
                 </div>
-                <div class="sm:p-6 lg:p-8 bg-gray-800 rounded" v-if="!user">
+                <div class="sm:p-6 lg:p-8 bg-gray-200 dark:bg-gray-800 rounded m-4 p-4" v-if="!user">
                     <div class="flex flex-col space-y-5 items-center">
                         <h2 class="dark:text-gray-200">...Or log in to save your QR Code for later</h2>
                         <BreezeValidationErrors class="mb-4" />
