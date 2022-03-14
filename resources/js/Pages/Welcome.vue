@@ -2,25 +2,11 @@
 import { Head, Link, useForm, usePage } from "@inertiajs/inertia-vue3";
 import BreezeButton from "../Components/Button.vue";
 import BreezeInput from "../Components/Input.vue";
+import LoginForm from "@/Components/Forms/Login.vue";
 import { computed, ref } from "vue-demi";
 import VueQrious from "vue-qrious";
 import { Page, PageProps } from "@inertiajs/inertia";
-import BreezeCheckbox from '@/Components/Checkbox.vue';
-import BreezeLabel from '@/Components/Label.vue';
-import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 import route from 'ziggy-js';
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false
-});
-
-const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
-    });
-};
 
 interface IPageProps extends Page<PageProps> {
     auth: {
@@ -96,60 +82,7 @@ const props = defineProps<{
                 <div class="sm:p-6 lg:p-8 bg-gray-200 dark:bg-gray-800 rounded m-4 p-4" v-if="!user">
                     <div class="flex flex-col space-y-5 items-center">
                         <h2 class="dark:text-gray-200">...Or log in to save your QR Code for later</h2>
-                        <BreezeValidationErrors class="mb-4" />
-                        <form @submit.prevent="submit">
-                            <div>
-                                <BreezeLabel for="email" value="Email" />
-                                <BreezeInput
-                                    id="email"
-                                    type="email"
-                                    class="mt-1 block w-full"
-                                    v-model="form.email"
-                                    required
-                                    autofocus
-                                    autocomplete="username"
-                                />
-                            </div>
-
-                            <div class="mt-4">
-                                <BreezeLabel for="password" value="Password" />
-                                <BreezeInput
-                                    id="password"
-                                    type="password"
-                                    class="mt-1 block w-full"
-                                    v-model="form.password"
-                                    required
-                                    autocomplete="current-password"
-                                />
-                            </div>
-
-                            <div class="block mt-4">
-                                <label class="flex items-center">
-                                    <BreezeCheckbox
-                                        name="remember"
-                                        v-model:checked="form.remember"
-                                    />
-                                    <span
-                                        class="ml-2 text-sm text-gray-600 dark:text-gray-200"
-                                    >Remember me</span>
-                                </label>
-                            </div>
-
-                            <div class="flex items-center justify-end mt-4">
-                                <Link
-                                    v-if="canResetPassword"
-                                    :href="route('password.request')"
-                                    class="underline text-sm text-gray-600 hover:text-gray-900"
-                                >Forgot your password?</Link>
-
-                                <BreezeButton
-                                    type="submit"
-                                    class="ml-4"
-                                    :class="{ 'opacity-25': form.processing }"
-                                    :disabled="form.processing"
-                                >Log in</BreezeButton>
-                            </div>
-                        </form>
+                        <LoginForm />
                     </div>
                 </div>
             </div>
