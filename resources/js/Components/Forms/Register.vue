@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import BreezeButton from '@/Components/Button.vue';
-import BreezeGuestLayout from '@/Layouts/Guest.vue';
 import BreezeInput from '@/Components/Input.vue';
 import BreezeLabel from '@/Components/Label.vue';
 import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
-import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
+import { Link, useForm } from '@inertiajs/inertia-vue3';
 import route from 'ziggy-js'
 
 const form = useForm({
@@ -25,7 +24,7 @@ const submit = () => {
 <template>
     <BreezeValidationErrors class="mb-4" />
 
-    <form @submit.prevent="submit">
+    <form @submit.prevent="submit" class="w-full">
         <div>
             <BreezeLabel for="name" value="Name" />
             <BreezeInput
@@ -78,7 +77,7 @@ const submit = () => {
         <div class="flex items-center justify-end mt-4">
             <Link
                 :href="route('login')"
-                class="underline text-sm text-gray-600 hover:text-gray-900"
+                class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-600"
             >Already registered?</Link>
 
             <BreezeButton

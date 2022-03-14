@@ -2,7 +2,7 @@
 import { Head, Link, useForm, usePage } from "@inertiajs/inertia-vue3";
 import BreezeButton from "../Components/Button.vue";
 import BreezeInput from "../Components/Input.vue";
-import LoginForm from "@/Components/Forms/Login.vue";
+import RegisterForm from "@/Components/Forms/Register.vue";
 import { computed, ref } from "vue-demi";
 import VueQrious from "vue-qrious";
 import { Page, PageProps } from "@inertiajs/inertia";
@@ -90,8 +90,8 @@ const props = defineProps<{
                     v-if="!user"
                 >
                     <div class="flex flex-col space-y-5 items-center">
-                        <h2 class="dark:text-gray-200">...Or log in to save your QR Code for later</h2>
-                        <LoginForm />
+                        <h2 class="dark:text-gray-200">...or Register to save your QR Code for later</h2>
+                        <RegisterForm />
                     </div>
                 </div>
             </div>
