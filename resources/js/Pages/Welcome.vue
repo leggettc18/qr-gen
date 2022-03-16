@@ -11,18 +11,28 @@ import route from 'ziggy-js';
 interface IPageProps extends Page<PageProps> {
     auth: {
         user: Function
+        links: Function
     }
 }
 
 const user = computed(() => usePage<IPageProps>().props.value.auth.user);
+const links = usePage<IPageProps>().props.value.auth.links;
 //const route = useRoute();
 
-var qrlinkcurrent = ref("");
 var qrlinknew = ref("");
 
 const updateQrLink = () => {
-    qrlinkcurrent.value = qrlinknew.value;
+    form.qrlinkcurrent = qrlinknew.value;
 };
+
+const form = useForm({
+    qrlinkcurrent: '',
+    name: ''
+})
+
+const postLink = () => {
+    form.post(route('link.store'));
+}
 
 const props = defineProps<{
     canLogin: boolean
@@ -79,19 +89,26 @@ const props = defineProps<{
                             <BreezeButton type="button" @click="updateQrLink()">Update</BreezeButton>
                         </div>
                         <VueQrious
-                            v-show="qrlinkcurrent != ''"
-                            :value="qrlinkcurrent"
+                            v-show="form.qrlinkcurrent != ''"
+                            :value="form.qrlinkcurrent"
                             class="border-4 border-gray-600 rounded"
                         />
+                        <div class="flex space-x-2">
+                            <BreezeInput type="text" v-model="form.name" />
+                            <BreezeButton type="button" @click="postLink">Save</BreezeButton>
+                        </div>
                     </div>
-                </div>
-                <div
-                    class="sm:p-6 lg:p-8 bg-gray-200 dark:bg-gray-800 rounded m-4 p-4"
-                    v-if="!user"
-                >
-                    <div class="flex flex-col space-y-5 items-center">
-                        <h2 class="dark:text-gray-200">...or Register to save your QR Code for later</h2>
-                        <RegisterForm />
+                    {{ links }}
+                    <div
+                        class="sm:p-6 lg:p-8 bg-gray-200 dark:bg-gray-800 rounded m-4 p-4"
+                        v-if="!user"
+                    >
+                        <div class="flex flex-col space-y-5 items-center">
+                            <h2
+                                class="dark:text-gray-200"
+                            >...or Register to save your QR Code for later</h2>
+                            <RegisterForm />
+                        </div>
                     </div>
                 </div>
             </div>

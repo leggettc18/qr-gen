@@ -41,8 +41,9 @@ class LinkController extends Controller
         $link = Link::create([
             'name' => $request->name,
             'link' => $request->link,
-            'user_id' => Auth::id()
+            'user_id' => Auth::user()->id
         ]);
+        return redirect()->back();
     }
 
     /**
