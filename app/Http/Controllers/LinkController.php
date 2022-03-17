@@ -40,10 +40,10 @@ class LinkController extends Controller
     {
         $link = Link::create([
             'name' => $request->name,
-            'link' => $request->link,
+            'url' => $request->qrlinkcurrent,
             'user_id' => Auth::user()->id
         ]);
-        return redirect()->back();
+        return Redirect::route('welcome');
     }
 
     /**
