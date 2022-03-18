@@ -22,14 +22,14 @@ const links = usePage<IPageProps>().props.value.auth.links;
 var qrlinknew = ref("");
 
 const updateQrLink = () => {
-    form.qrlinkcurrent = qrlinknew.value;
+    form.url = "https://" + qrlinknew.value;
 };
 
 const form = useForm<{
-    qrlinkcurrent: null | string,
+    url: null | string,
     name: null | string
 }>({
-    qrlinkcurrent: null,
+    url: null,
     name: null
 })
 
@@ -82,28 +82,34 @@ const props = defineProps<{
         <div class="prose flex flex-col items-center min-w-full">
             <h1 class="dark:text-gray-200">QR Gen</h1>
             <div class="flex flex-col lg:flex-row justify-around min-w-full">
-                <div class="sm:p-6 lg:p-8 bg-gray-200 dark:bg-gray-800 rounded m-4 p-4">
-                    <div class="flex flex-col space-y-3 h-full items-center justify-around">
+                <div class="flex flex-col lg:flex-row">
+                    <div
+                        class="flex flex-col bg-gray-200 dark:bg-gray-800 h-full items-center sm:p-6 lg:p-8 rounded m-4 p-4 space-y-3"
+                    >
                         <h2
                             class="dark:text-gray-200"
                         >{{ user ? "Generate a QR Code" : "Just Generate a QR Code..." }}</h2>
                         <div class="flex space-x-2">
+                            <span
+                                class="bg-gray-400 dark:bg-gray-700 text-gray-900 dark:text-gray-200 p-2 rounded"
+                            >https://</span>
                             <BreezeInput type="text" v-model="qrlinknew" />
                             <BreezeButton type="button" @click="updateQrLink()">Update</BreezeButton>
                         </div>
-                        <VueQrious
-                            v-if="form.qrlinkcurrent"
-                            :value="form.qrlinkcurrent"
-                            class="border-4 border-gray-600 rounded"
-                        />
-                        <div class="flex space-x-2">
+                        <div class="h-1/3">
+                            <VueQrious
+                                v-if="form.url"
+                                :value="form.url"
+                                class="border-4 border-gray-600 rounded h-full m-0"
+                            />
+                        </div>
+                        <div v-if="user" class="flex space-x-2 w-full justify-between">
                             <BreezeInput type="text" v-model="form.name" />
                             <BreezeButton type="button" @click="postLink">Save</BreezeButton>
                         </div>
                     </div>
-                    {{ links }}
                     <div
-                        class="sm:p-6 lg:p-8 bg-gray-200 dark:bg-gray-800 rounded m-4 p-4"
+                        class="h-full sm:p-6 lg:p-8 bg-gray-200 dark:bg-gray-800 rounded m-4 p-4"
                         v-if="!user"
                     >
                         <div class="flex flex-col space-y-5 items-center">
