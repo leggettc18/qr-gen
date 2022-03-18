@@ -12,5 +12,6 @@ class Link extends Model
     protected $fillable = [
         'name',
         'url',
+        'user_id'
     ];
 }

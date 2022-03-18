@@ -25,9 +25,12 @@ const updateQrLink = () => {
     form.qrlinkcurrent = qrlinknew.value;
 };
 
-const form = useForm({
-    qrlinkcurrent: '',
-    name: ''
+const form = useForm<{
+    qrlinkcurrent: null | string,
+    name: null | string
+}>({
+    qrlinkcurrent: null,
+    name: null
 })
 
 const postLink = () => {
@@ -89,7 +92,7 @@ const props = defineProps<{
                             <BreezeButton type="button" @click="updateQrLink()">Update</BreezeButton>
                         </div>
                         <VueQrious
-                            v-show="form.qrlinkcurrent != ''"
+                            v-if="form.qrlinkcurrent"
                             :value="form.qrlinkcurrent"
                             class="border-4 border-gray-600 rounded"
                         />

@@ -25,7 +25,7 @@ class StoreLinkRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'url' => ['required', 'string', 'url']
+            'qrlinkcurrent' => ['required', 'string', 'url']
         ];
     }
 }

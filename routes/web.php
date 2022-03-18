@@ -29,6 +29,6 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('/link', LinkController::class)->middleware(['auth', 'verified']);
+Route::resource('/link', LinkController::class)->middleware(['auth']);
 
 require __DIR__.'/auth.php';

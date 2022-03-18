@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreLinkRequest;
 use App\Http\Requests\UpdateLinkRequest;
+use App\Providers\RouteServiceProvider;
 use App\Models\Link;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,7 +44,7 @@ class LinkController extends Controller
             'url' => $request->qrlinkcurrent,
             'user_id' => Auth::user()->id
         ]);
-        return Redirect::route('welcome');
+        return redirect()->back();
     }
 
     /**
