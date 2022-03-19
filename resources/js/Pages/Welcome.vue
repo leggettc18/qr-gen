@@ -89,12 +89,12 @@ const props = defineProps<{
                         <h2
                             class="dark:text-gray-200"
                         >{{ user ? "Generate a QR Code" : "Just Generate a QR Code..." }}</h2>
-                        <div class="flex space-x-2">
-                            <span
-                                class="bg-gray-400 dark:bg-gray-700 text-gray-900 dark:text-gray-200 p-2 rounded"
-                            >https://</span>
+                        <div class="flex justify-end flex-wrap space-x-2">
+                            <div
+                                class="flex items-center"
+                            ><span class="bg-gray-400 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded p-2">https://</span></div>
                             <BreezeInput type="text" v-model="qrlinknew" />
-                            <BreezeButton type="button" @click="updateQrLink()">Update</BreezeButton>
+                            <BreezeButton type="button" @click="updateQrLink()" class="mt-2 md:mt-0">Update</BreezeButton>
                         </div>
                         <div class="h-1/3">
                             <VueQrious
