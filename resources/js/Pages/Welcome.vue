@@ -10,15 +10,13 @@
 
     interface IPageProps extends Page<PageProps> {
         auth: {
-            user: Function;
-            links: Function;
+            user: {
+                links: Function;
+            };
         };
     }
 
     const user = computed(() => usePage<IPageProps>().props.value.auth.user);
-    const links = usePage<IPageProps>().props.value.auth.links;
-    //const route = useRoute();
-
     var qrlinknew = ref('');
 
     const updateQrLink = () => {
@@ -37,7 +35,7 @@
         form.post(route('link.store'));
     };
 
-    const props = defineProps<{
+    defineProps<{
         canLogin: boolean;
         canRegister: boolean;
         laravelVersion: string;
