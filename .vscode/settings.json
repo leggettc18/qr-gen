@@ -7,5 +7,10 @@
         ".flatpak": true,
         ".flatpak/**": true,
         "_build/**": true
-    }
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll": true
+    },
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
