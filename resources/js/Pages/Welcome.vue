@@ -95,7 +95,7 @@
             <h1 class="dark:text-gray-200">QR Gen</h1>
             <div
                 v-if="user"
-                class="dark:bg-gray-700 dark:text-gray-200 mt-8 p-2 rounded"
+                class="dark:bg-gray-800 dark:text-gray-200 mt-8 p-4 rounded"
             >
                 Manage your saved links from your
                 <Link
