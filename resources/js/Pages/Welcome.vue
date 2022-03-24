@@ -57,9 +57,18 @@
         >
             <Link
                 v-if="user"
-                :href="route('logout')"
+                :href="route('dashboard')"
                 method="post"
                 class="text-sm text-gray-700 dark:text-gray-500 underline"
+                as="button"
+                >Dashboard</Link
+            >
+
+            <Link
+                v-if="user"
+                :href="route('logout')"
+                method="post"
+                class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline"
                 as="button"
                 >Log Out</Link
             >
@@ -84,6 +93,19 @@
 
         <div class="prose flex flex-col items-center min-w-full">
             <h1 class="dark:text-gray-200">QR Gen</h1>
+            <div
+                v-if="user"
+                class="dark:bg-gray-700 dark:text-gray-200 mt-8 p-2 rounded"
+            >
+                Manage your saved links from your
+                <Link
+                    :href="route('dashboard')"
+                    method="get"
+                    as="button"
+                    class="dark:bg-gray-900 bg-gray-300 rounded p-2 hover:bg-gray-900 hover:dark:bg-gray-800 hover:text-gray-200 transition ease"
+                    >Dashboard</Link
+                >
+            </div>
             <div class="flex flex-col lg:flex-row justify-around min-w-full">
                 <div class="flex flex-col lg:flex-row">
                     <div
@@ -99,7 +121,7 @@
                         <div class="flex justify-end flex-wrap space-x-2">
                             <div class="flex items-center">
                                 <span
-                                    class="bg-gray-400 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded p-2"
+                                    class="bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded p-2"
                                     >https://</span
                                 >
                             </div>
