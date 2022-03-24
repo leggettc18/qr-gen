@@ -58,7 +58,7 @@
             <Link
                 v-if="user"
                 :href="route('dashboard')"
-                method="post"
+                method="get"
                 class="text-sm text-gray-700 dark:text-gray-500 underline"
                 as="button"
                 >Dashboard</Link
