@@ -23,16 +23,21 @@
         form.url = 'https://' + qrlinknew.value;
     };
 
-    const form = useForm<{
-        url: null | string;
-        name: null | string;
-    }>({
-        url: null,
-        name: null,
+    const form = useForm({
+        url: '',
+        name: '',
     });
 
     const postLink = () => {
-        form.post(route('link.store'));
+        form.post(route('link.store'), {
+            onFinish: () => {
+                form.reset('url');
+                form.reset('name');
+                form.url = '';
+                form.name = '';
+                qrlinknew.value = '';
+            },
+        });
     };
 
     defineProps<{
@@ -135,7 +140,7 @@
                         </div>
                         <div class="h-1/3">
                             <VueQrious
-                                v-if="form.url"
+                                v-if="form.url != ''"
                                 :value="form.url"
                                 class="border-4 border-gray-600 rounded h-full m-0"
                             />
