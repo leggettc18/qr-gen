@@ -13,7 +13,7 @@ class UpdateLinkRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return $this->user_id == auth()->id();
     }
 
     /**
@@ -24,7 +24,8 @@ class UpdateLinkRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'string'],
+            'url' => ['required', 'string', 'url']
         ];
     }
 }

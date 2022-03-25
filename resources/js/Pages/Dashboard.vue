@@ -1,10 +1,9 @@
 <script setup lang="ts">
     import BreezeAuthenticatedLayout from '@/Layouts/Authenticated.vue';
-    import { PencilIcon, TrashIcon, ShareIcon } from '@heroicons/vue/solid';
     import { Page, PageProps } from '@inertiajs/inertia';
     import { Head, usePage } from '@inertiajs/inertia-vue3';
     import { computed } from 'vue';
-    import VueQrious from 'vue-qrious';
+import QrCodeManager from '@/Components/QrCodeManager.vue';
 
     interface IPageProps extends Page<PageProps> {
         auth: {
@@ -38,33 +37,9 @@
                     >
                         <div
                             v-for="link in user.links"
-                            class="flex flex-col items-center dark:bg-gray-700 rounded p-4 m-4 basis-52"
+                            class="flex justify-center dark:bg-gray-700 rounded p-4 m-4 basis-52"
                         >
-                            <h2 class="dark:text-gray-200 m-1">
-                                {{ link.name }}
-                            </h2>
-                            <VueQrious
-                                v-if="link.url"
-                                :value="link.url"
-                                class="border-4 border-gray-600 rounded m-0 flex-grow"
-                            />
-                            <div class="flex space-x-2 m-2">
-                                <button
-                                    class="bg-blue-500 text-gray-100 rounded p-2"
-                                >
-                                    <PencilIcon class="h-5 w-5" />
-                                </button>
-                                <button
-                                    class="bg-emerald-500 text-gray-100 rounded p-2"
-                                >
-                                    <ShareIcon class="h-5 w-5" />
-                                </button>
-                                <button
-                                    class="bg-red-500 text-gray-100 rounded p-2"
-                                >
-                                    <TrashIcon class="h-5 w-5" />
-                                </button>
-                            </div>
+                            <QrCodeManager :link="link"></QrCodeManager>
                         </div>
                     </div>
                 </div>

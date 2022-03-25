@@ -77,7 +77,11 @@ class LinkController extends Controller
      */
     public function update(UpdateLinkRequest $request, Link $link)
     {
-        //
+        $link->name = $request->name;
+        $link->url = $request->url;
+        $link->update();
+
+        return redirect()->back();
     }
 
     /**
