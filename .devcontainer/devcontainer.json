@@ -15,7 +15,10 @@
         "amiralizadeh9480.laravel-extra-intellisense",
         "ryannaddy.laravel-artisan",
         "onecentlin.laravel5-snippets",
-        "onecentlin.laravel-blade"
+        "onecentlin.laravel-blade",
+        "ctf0.laravel-goto-controller",
+        "ctf0.laravel-goto-view",
+        "naoray.laravel-goto-components"
     ],
     "remoteUser": "sail"
     // "forwardPorts": [],
