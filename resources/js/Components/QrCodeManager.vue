@@ -46,56 +46,58 @@
 </script>
 
 <template>
-    <div class="flex flex-col">
-        <h2 class="dark:text-gray-200 m-1">
-            {{ link.name }}
-        </h2>
-        <VueQrious
-            v-if="link.url"
-            :value="link.url"
-            class="border-4 border-gray-600 rounded m-0 flex-grow"
-        />
-        <div class="flex space-x-2 m-2">
-            <button
-                class="bg-blue-500 text-gray-100 rounded p-2"
-                @click="showEdit = !showEdit"
-            >
-                <PencilIcon class="h-5 w-5" />
-            </button>
-            <button class="bg-emerald-500 text-gray-100 rounded p-2">
-                <ShareIcon class="h-5 w-5" />
-            </button>
-            <button
-                class="bg-red-500 text-gray-100 rounded p-2"
-                @click="destroy"
-            >
-                <TrashIcon class="h-5 w-5" />
-            </button>
+    <div class="flex flex-col md:flex-row">
+        <div class="flex flex-col items-center m-4">
+            <h2 class="dark:text-gray-200 m-1">
+                {{ link.name }}
+            </h2>
+            <VueQrious
+                v-if="link.url"
+                :value="link.url"
+                class="border-4 border-gray-600 rounded m-0 w-48"
+            />
+            <div class="flex space-x-2 m-2">
+                <button
+                    class="bg-blue-500 text-gray-100 rounded p-2"
+                    @click="showEdit = !showEdit"
+                >
+                    <PencilIcon class="h-5 w-5" />
+                </button>
+                <button class="bg-emerald-500 text-gray-100 rounded p-2">
+                    <ShareIcon class="h-5 w-5" />
+                </button>
+                <button
+                    class="bg-red-500 text-gray-100 rounded p-2"
+                    @click="destroy"
+                >
+                    <TrashIcon class="h-5 w-5" />
+                </button>
+            </div>
         </div>
-    </div>
-    <div class="p-2" v-if="showEdit">
-        <form @submit.prevent="submit">
-            <div>
-                <BreezeLabel for="name" value="Name" />
-                <BreezeInput
-                    id="name"
-                    type="text"
-                    class="mt-1"
-                    v-model="form.name"
-                />
-            </div>
-            <div class="mt-4">
-                <BreezeLabel for="url" value="URL" />
-                <BreezeInput
-                    id="url"
-                    type="text"
-                    class="mt-1"
-                    v-model="form.url"
-                />
-            </div>
-            <div class="mt-4">
-                <BreezeButton type="submit">Update</BreezeButton>
-            </div>
-        </form>
+        <div v-if="showEdit">
+            <form @submit.prevent="submit">
+                <div>
+                    <BreezeLabel for="name" value="Name" />
+                    <BreezeInput
+                        id="name"
+                        type="text"
+                        class="mt-1"
+                        v-model="form.name"
+                    />
+                </div>
+                <div class="mt-4">
+                    <BreezeLabel for="url" value="URL" />
+                    <BreezeInput
+                        id="url"
+                        type="text"
+                        class="mt-1"
+                        v-model="form.url"
+                    />
+                </div>
+                <div class="mt-4">
+                    <BreezeButton type="submit">Update</BreezeButton>
+                </div>
+            </form>
+        </div>
     </div>
 </template>
