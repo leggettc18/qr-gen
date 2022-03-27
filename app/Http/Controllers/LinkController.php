@@ -92,6 +92,10 @@ class LinkController extends Controller
      */
     public function destroy(Link $link)
     {
-        //
+        if ($link->user_id != auth()->id()) {
+            return response('You cannot delete a link that does not belong to you', 403);
+        }
+        Link::destroy($link->id);
+        return redirect('dashboard');
     }
 }

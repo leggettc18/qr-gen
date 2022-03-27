@@ -35,6 +35,14 @@
             },
         );
     };
+
+    const destroy = () => {
+        form.delete(
+            route('link.destroy', {
+                link: link,
+            }),
+        );
+    };
 </script>
 
 <template>
@@ -57,7 +65,10 @@
             <button class="bg-emerald-500 text-gray-100 rounded p-2">
                 <ShareIcon class="h-5 w-5" />
             </button>
-            <button class="bg-red-500 text-gray-100 rounded p-2">
+            <button
+                class="bg-red-500 text-gray-100 rounded p-2"
+                @click="destroy"
+            >
                 <TrashIcon class="h-5 w-5" />
             </button>
         </div>
