@@ -37,7 +37,8 @@ import QrCodeManager from '@/Components/QrCodeManager.vue';
                     >
                         <div
                             v-for="link in user.links"
-                            class="flex justify-center dark:bg-gray-700 rounded p-4 m-4 basis-52"
+                            :key="link.id"
+                            class="flex justify-center dark:bg-gray-900 rounded-3xl p-4 m-4 basis-52"
                         >
                             <QrCodeManager :link="link"></QrCodeManager>
                         </div>

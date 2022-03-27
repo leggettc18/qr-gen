@@ -22,9 +22,18 @@
     const form = useForm(link);
 
     const submit = () => {
-        form.put(route('link.update', {
-            link: link
-        }));
+        form.put(
+            route('link.update', {
+                link: link,
+            }),
+            {
+                onFinish: () => {
+                    showEdit.value = false;
+                    form.reset('name');
+                    form.reset('url');
+                },
+            },
+        );
     };
 </script>
 

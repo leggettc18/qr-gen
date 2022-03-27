@@ -81,7 +81,7 @@ class LinkController extends Controller
         $link->url = $request->url;
         $link->update();
 
-        return redirect()->back();
+        return redirect('dashboard');
     }
 
     /**
