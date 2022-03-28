@@ -4,7 +4,7 @@
     import BreezeInput from '../Components/Input.vue';
     import RegisterForm from '@/Components/Forms/Register.vue';
     import { computed, ref } from 'vue-demi';
-    import VueQrious from 'vue-qrious';
+    import VueQrcode from '@chenfengyuan/vue-qrcode';
     import { Page, PageProps } from '@inertiajs/inertia';
     import route from 'ziggy-js';
 
@@ -139,7 +139,7 @@
                             >
                         </div>
                         <div class="h-1/3">
-                            <VueQrious
+                            <VueQrcode
                                 v-if="form.url != ''"
                                 :value="form.url"
                                 class="border-4 border-gray-600 rounded h-full m-0"

@@ -2,8 +2,8 @@
     import { useForm } from '@inertiajs/inertia-vue3';
     import { ref } from 'vue';
     import BreezeInput from './Input.vue';
-    import { PencilIcon, TrashIcon, ShareIcon } from '@heroicons/vue/solid';
-    import VueQrious from 'vue-qrious';
+    import { PencilIcon, TrashIcon, DownloadIcon } from '@heroicons/vue/solid';
+    import VueQrcode from '@chenfengyuan/vue-qrcode';
     import BreezeLabel from './Label.vue';
     import BreezeButton from './Button.vue';
     import route from 'ziggy-js';
@@ -18,6 +18,10 @@
 
     const { link } = defineProps<Props>();
     const showEdit = ref(false);
+    const imageUrl = ref('');
+    const onReady = (canvas: HTMLCanvasElement) => {
+        imageUrl.value = canvas.toDataURL();
+    };
 
     const form = useForm(link);
 
@@ -36,6 +40,15 @@
         );
     };
 
+    const share = () => {
+        const a = document.createElement('a');
+        a.href = imageUrl.value;
+        a.download = `${link.name}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    };
+
     const destroy = () => {
         form.delete(
             route('link.destroy', {
@@ -51,7 +64,8 @@
             <h2 class="dark:text-gray-200 m-1">
                 {{ link.name }}
             </h2>
-            <VueQrious
+            <VueQrcode
+                @ready="onReady"
                 v-if="link.url"
                 :value="link.url"
                 class="border-4 border-gray-600 rounded m-0 w-48"
@@ -63,8 +77,11 @@
                 >
                     <PencilIcon class="h-5 w-5" />
                 </button>
-                <button class="bg-emerald-500 text-gray-100 rounded p-2">
-                    <ShareIcon class="h-5 w-5" />
+                <button
+                    class="bg-emerald-500 text-gray-100 rounded p-2"
+                    @click="share"
+                >
+                    <DownloadIcon class="h-5 w-5" />
                 </button>
                 <button
                     class="bg-red-500 text-gray-100 rounded p-2"
