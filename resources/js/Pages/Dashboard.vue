@@ -3,7 +3,7 @@
     import { Page, PageProps } from '@inertiajs/inertia';
     import { Head, usePage } from '@inertiajs/inertia-vue3';
     import { computed } from 'vue';
-import QrCodeManager from '@/Components/QrCodeManager.vue';
+    import QrCodeManager from '@/Components/QrCodeManager.vue';
 
     interface IPageProps extends Page<PageProps> {
         auth: {
@@ -29,6 +29,11 @@ import QrCodeManager from '@/Components/QrCodeManager.vue';
 
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 prose">
+                <div
+                    class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg mb-4"
+                >
+                    New QR Code Form
+                </div>
                 <div
                     class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg"
                 >

@@ -3,7 +3,7 @@
     import BreezeButton from '../Components/Button.vue';
     import BreezeInput from '../Components/Input.vue';
     import RegisterForm from '@/Components/Forms/Register.vue';
-    import { computed, ref } from 'vue-demi';
+    import { computed, ref } from 'vue';
     import VueQrcode from '@chenfengyuan/vue-qrcode';
     import { Page, PageProps } from '@inertiajs/inertia';
     import route from 'ziggy-js';
