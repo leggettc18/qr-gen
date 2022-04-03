@@ -4,6 +4,7 @@
     import { Head, usePage } from '@inertiajs/inertia-vue3';
     import { computed } from 'vue';
     import QrCodeManager from '@/Components/QrCodeManager.vue';
+    import CreateQrCode from '@/Components/Forms/CreateQrCode.vue';
 
     interface IPageProps extends Page<PageProps> {
         auth: {
@@ -30,15 +31,15 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 prose">
                 <div
-                    class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg mb-4"
+                    class="bg-indigo-100 dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg mb-4"
                 >
-                    New QR Code Form
+                    <CreateQrCode />
                 </div>
                 <div
                     class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg"
                 >
                     <div
-                        class="p-6 bg-white dark:bg-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-800 flex flex-wrap justify-center sm:justify-around"
+                        class="p-6 bg-indigo-100 dark:bg-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-800 flex flex-wrap justify-center sm:justify-around"
                     >
                         <div
                             v-for="link in user.links"
