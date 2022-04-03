@@ -1,8 +1,9 @@
 <script setup lang="ts">
-    import { Head, Link, useForm, usePage } from '@inertiajs/inertia-vue3';
+    import { Head, Link, usePage } from '@inertiajs/inertia-vue3';
     import BreezeButton from '../Components/Button.vue';
     import BreezeInput from '../Components/Input.vue';
     import RegisterForm from '@/Components/Forms/Register.vue';
+    import { DownloadIcon } from '@heroicons/vue/solid';
     import { computed, ref } from 'vue';
     import VueQrcode from '@chenfengyuan/vue-qrcode';
     import { Page, PageProps } from '@inertiajs/inertia';
@@ -19,25 +20,26 @@
     const user = computed(() => usePage<IPageProps>().props.value.auth.user);
     var qrlinknew = ref('');
 
-    const updateQrLink = () => {
-        form.url = 'https://' + qrlinknew.value;
-    };
-
-    const form = useForm({
+    const form = ref({
         url: '',
-        name: '',
     });
 
-    const postLink = () => {
-        form.post(route('link.store'), {
-            onFinish: () => {
-                form.reset('url');
-                form.reset('name');
-                form.url = '';
-                form.name = '';
-                qrlinknew.value = '';
-            },
-        });
+    const updateQrLink = () => {
+        form.value.url = 'https://' + qrlinknew.value;
+    };
+
+    const imageUrl = ref('');
+    const onReady = (canvas: HTMLCanvasElement) => {
+        imageUrl.value = canvas.toDataURL();
+    };
+
+    const share = () => {
+        const a = document.createElement('a');
+        a.href = imageUrl.value;
+        a.download = `qrcode.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
     };
 
     defineProps<{
@@ -138,21 +140,22 @@
                                 >Update</BreezeButton
                             >
                         </div>
-                        <div class="h-1/3">
+                        <div
+                            v-if="form.url != ''"
+                            class="h-1/3 flex space-x-2 items-center mt-4"
+                        >
                             <VueQrcode
+                                @ready="onReady"
                                 v-if="form.url != ''"
                                 :value="form.url"
                                 class="border-4 border-gray-600 rounded h-full m-0"
                             />
-                        </div>
-                        <div
-                            v-if="user"
-                            class="flex space-x-2 w-full justify-between"
-                        >
-                            <BreezeInput type="text" v-model="form.name" />
-                            <BreezeButton type="button" @click="postLink"
-                                >Save</BreezeButton
+                            <button
+                                class="bg-emerald-500 text-gray-100 rounded p-2"
+                                @click="share"
                             >
+                                <DownloadIcon class="h-5 w-5" />
+                            </button>
                         </div>
                     </div>
                     <div
