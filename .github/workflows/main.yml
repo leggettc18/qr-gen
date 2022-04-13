@@ -29,6 +29,6 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           username: deploy
-          host: demo.qr-gen.leggett.dev
+          host: demo.qrgen.leggett.dev
           password: ${{ secrets.SSH_KEY }}
           script: 'cd /var/www/qr-gen && ./server_deploy.sh'
