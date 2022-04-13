@@ -26,7 +26,7 @@ jobs:
           git commit -m "Build front-end assets"
           git push -f origin deploy
       - name: Deploy to production
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v0.1.4
         with:
           username: deploy
           host: demo.qrgen.leggett.dev
