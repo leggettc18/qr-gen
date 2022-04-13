@@ -4,7 +4,7 @@ set -e
 echo "Deploying application ..."
 
 # Enter maintenance mode
-(php artisan down --message 'The app is being (quickly!) updated. Please try again in a minute.') || true
+(php artisan down --render='errors::503') || true
     # Update codebase
     git fetch origin deploy
     git reset --hard origin/deploy
