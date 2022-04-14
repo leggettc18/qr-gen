@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import VueQrcode from '@chenfengyuan/vue-qrcode';
     import BreezeButton from '@/Components/Button.vue';
-    import BreezeInput from '@/Components/Input.vue';
+    import BreezeInput from '@/Components/DebouncedInput.vue';
     import BreezeLabel from '@/Components/Label.vue';
     import route from 'ziggy-js';
     import { useForm } from '@inertiajs/inertia-vue3';
@@ -12,20 +12,14 @@
         name: '',
     });
 
-    const updateQrLink = () => {
-        form.url = 'https://' + qrlinknew.value;
-    };
-
-    var qrlinknew = ref('');
-
     const postLink = () => {
+        form.url = 'https://' + form.url
         form.post(route('link.store'), {
             onFinish: () => {
                 form.reset('url');
                 form.reset('name');
                 form.url = '';
                 form.name = '';
-                qrlinknew.value = '';
             },
         });
     };
@@ -43,13 +37,7 @@
                     >https://</span
                 >
             </div>
-            <BreezeInput type="text" v-model="qrlinknew" />
-            <BreezeButton
-                type="button"
-                @click="updateQrLink()"
-                class="mt-2 md:mt-0 bg-indigo-900"
-                >Update</BreezeButton
-            >
+            <BreezeInput type="text" v-model="form.url" />
         </div>
         <div class="h-1/3">
             <VueQrcode
