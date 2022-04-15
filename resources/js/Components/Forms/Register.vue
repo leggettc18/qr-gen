@@ -1,24 +1,24 @@
 <script setup lang="ts">
-import BreezeButton from '@/Components/Button.vue';
-import BreezeInput from '@/Components/Input.vue';
-import BreezeLabel from '@/Components/Label.vue';
-import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
-import { Link, useForm } from '@inertiajs/inertia-vue3';
-import route from 'ziggy-js'
+    import BreezeButton from '@/Components/Button.vue';
+    import BreezeInput from '@/Components/Input.vue';
+    import BreezeLabel from '@/Components/Label.vue';
+    import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
+    import { Link, useForm } from '@inertiajs/inertia-vue3';
+    import route from 'ziggy-js';
 
-const form = useForm({
-    name: '',
-    email: '',
-    password: '',
-    password_confirmation: '',
-    terms: false,
-});
-
-const submit = () => {
-    form.post(route('register'), {
-        onFinish: () => form.reset('password', 'password_confirmation'),
+    const form = useForm({
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        terms: false,
     });
-};
+
+    const submit = () => {
+        form.post(route('register'), {
+            onFinish: () => form.reset('password', 'password_confirmation'),
+        });
+    };
 </script>
 
 <template>
@@ -77,14 +77,16 @@ const submit = () => {
         <div class="flex items-center justify-end mt-4">
             <Link
                 :href="route('login')"
-                class="underline text-sm text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-600"
-            >Already registered?</Link>
+                class="underline text-md text-success-500 hover:text-success-700 dark:text-success-200 dark:hover:text-success-400"
+                >Already registered?</Link
+            >
 
             <BreezeButton
-                class="ml-4"
+                class="ml-4 bg-secondary-900 hover:bg-secondary-700"
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
-            >Register</BreezeButton>
+                >Register</BreezeButton
+            >
         </div>
     </form>
 </template>

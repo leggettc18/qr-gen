@@ -1,34 +1,35 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
-//import BreezeApplicationLogo from "@/Components/ApplicationLogo.vue";
-import BreezeDropdown from "@/Components/Dropdown.vue";
-import BreezeDropdownLink from "@/Components/DropdownLink.vue";
-import BreezeNavLink from "@/Components/NavLink.vue";
-import BreezeResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
-import { Link, usePage } from "@inertiajs/inertia-vue3";
-import route from "ziggy-js";
-import { Page, PageProps } from "@inertiajs/inertia";
-import { QrcodeIcon } from '@heroicons/vue/solid';
+    import { computed, ref } from 'vue';
+    //import BreezeApplicationLogo from "@/Components/ApplicationLogo.vue";
+    import BreezeDropdown from '@/Components/Dropdown.vue';
+    import BreezeDropdownLink from '@/Components/DropdownLink.vue';
+    import BreezeNavLink from '@/Components/NavLink.vue';
+    import BreezeResponsiveNavLink from '@/Components/ResponsiveNavLink.vue';
+    import { Link, usePage } from '@inertiajs/inertia-vue3';
+    import route from 'ziggy-js';
+    import { Page, PageProps } from '@inertiajs/inertia';
+    import { QrcodeIcon } from '@heroicons/vue/solid';
 
+    const showingNavigationDropdown = ref(false);
 
-const showingNavigationDropdown = ref(false);
-
-interface IPageProps extends Page<PageProps> {
-    auth: {
-        user: {
-            name: string
-            email: string
-        }
+    interface IPageProps extends Page<PageProps> {
+        auth: {
+            user: {
+                name: string;
+                email: string;
+            };
+        };
     }
-}
 
-const user = computed(() => usePage<IPageProps>().props.value.auth.user);
+    const user = computed(() => usePage<IPageProps>().props.value.auth.user);
 </script>
 
 <template>
     <div>
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            <nav class="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+        <div class="min-h-screen">
+            <nav
+                class="bg-white dark:bg-zinc-900 border-b border-gray-100 dark:border-gray-800"
+            >
                 <!-- Primary Navigation Menu -->
                 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div class="flex justify-between h-16">
@@ -36,16 +37,21 @@ const user = computed(() => usePage<IPageProps>().props.value.auth.user);
                             <!-- Logo -->
                             <div class="shrink-0 flex items-center">
                                 <Link :href="route('dashboard')">
-                                    <QrcodeIcon class="block h-9 w-auto text-gray-700 dark:text-gray-300" />
+                                    <QrcodeIcon
+                                        class="block h-9 w-auto text-zinc-700 dark:text-zinc-300"
+                                    />
                                 </Link>
                             </div>
 
                             <!-- Navigation Links -->
-                            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                            <div
+                                class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex"
+                            >
                                 <BreezeNavLink
                                     :href="route('dashboard')"
                                     :active="route().current('dashboard')"
-                                >Dashboard</BreezeNavLink>
+                                    >Dashboard</BreezeNavLink
+                                >
                             </div>
                         </div>
 
@@ -57,7 +63,7 @@ const user = computed(() => usePage<IPageProps>().props.value.auth.user);
                                         <span class="inline-flex rounded-md">
                                             <button
                                                 type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white dark:bg-gray-800 hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
+                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-zinc-500 bg-white dark:bg-zinc-800 hover:text-zinc-700 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {{ user.name }}
                                                 <svg
@@ -81,7 +87,8 @@ const user = computed(() => usePage<IPageProps>().props.value.auth.user);
                                             :href="route('logout')"
                                             method="post"
                                             as="button"
-                                        >Log Out</BreezeDropdownLink>
+                                            >Log Out</BreezeDropdownLink
+                                        >
                                     </template>
                                 </BreezeDropdown>
                             </div>
@@ -90,8 +97,11 @@ const user = computed(() => usePage<IPageProps>().props.value.auth.user);
                         <!-- Hamburger -->
                         <div class="-mr-2 flex items-center sm:hidden">
                             <button
-                                @click="showingNavigationDropdown = !showingNavigationDropdown"
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-300 hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-700 focus:text-gray-500 transition duration-150 ease-in-out"
+                                @click="
+                                    showingNavigationDropdown =
+                                        !showingNavigationDropdown
+                                "
+                                class="inline-flex items-center justify-center p-2 rounded-md text-zinc-300 hover:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 focus:outline-none focus:bg-zinc-100 dark:focus:bg-zinc-700 focus:text-zinc-500 transition duration-150 ease-in-out"
                             >
                                 <svg
                                     class="h-6 w-6"
@@ -100,14 +110,22 @@ const user = computed(() => usePage<IPageProps>().props.value.auth.user);
                                     viewBox="0 0 24 24"
                                 >
                                     <path
-                                        :class="{ 'hidden': showingNavigationDropdown, 'inline-flex': !showingNavigationDropdown }"
+                                        :class="{
+                                            hidden: showingNavigationDropdown,
+                                            'inline-flex':
+                                                !showingNavigationDropdown,
+                                        }"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
                                         d="M4 6h16M4 12h16M4 18h16"
                                     />
                                     <path
-                                        :class="{ 'hidden': !showingNavigationDropdown, 'inline-flex': showingNavigationDropdown }"
+                                        :class="{
+                                            hidden: !showingNavigationDropdown,
+                                            'inline-flex':
+                                                showingNavigationDropdown,
+                                        }"
                                         stroke-linecap="round"
                                         stroke-linejoin="round"
                                         stroke-width="2"
@@ -121,25 +139,35 @@ const user = computed(() => usePage<IPageProps>().props.value.auth.user);
 
                 <!-- Responsive Navigation Menu -->
                 <div
-                    :class="{ 'block': showingNavigationDropdown, 'hidden': !showingNavigationDropdown }"
+                    :class="{
+                        block: showingNavigationDropdown,
+                        hidden: !showingNavigationDropdown,
+                    }"
                     class="sm:hidden"
                 >
                     <div class="pt-2 pb-3 space-y-1">
                         <BreezeResponsiveNavLink
                             :href="route('dashboard')"
                             :active="route().current('dashboard')"
-                        >Dashboard</BreezeResponsiveNavLink>
+                            >Dashboard</BreezeResponsiveNavLink
+                        >
                     </div>
 
                     <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-800">
+                    <div
+                        class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-800"
+                    >
                         <div class="px-4">
                             <div
-                                class="font-medium text-base text-gray-800 dark:text-gray-500"
-                            >{{ user.name }}</div>
+                                class="font-medium text-base text-zinc-800 dark:text-zinc-500"
+                            >
+                                {{ user.name }}
+                            </div>
                             <div
-                                class="font-medium text-sm text-gray-500 dark:text-gray-400"
-                            >{{ user.email }}</div>
+                                class="font-medium text-sm text-zinc-500 dark:text-zinc-400"
+                            >
+                                {{ user.email }}
+                            </div>
                         </div>
 
                         <div class="mt-3 space-y-1">
@@ -147,14 +175,18 @@ const user = computed(() => usePage<IPageProps>().props.value.auth.user);
                                 :href="route('logout')"
                                 method="post"
                                 as="button"
-                            >Log Out</BreezeResponsiveNavLink>
+                                >Log Out</BreezeResponsiveNavLink
+                            >
                         </div>
                     </div>
                 </div>
             </nav>
 
             <!-- Page Heading -->
-            <header class="bg-white shadow dark:bg-gray-700" v-if="$slots.header">
+            <header
+                class="bg-white shadow dark:bg-zinc-700"
+                v-if="$slots.header"
+            >
                 <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
                     <slot name="header" />
                 </div>

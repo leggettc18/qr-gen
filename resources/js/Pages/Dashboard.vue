@@ -22,29 +22,29 @@
     <BreezeAuthenticatedLayout>
         <template #header>
             <h2
-                class="font-semibold text-xl text-gray-800 dark:text-gray-100 leading-tight"
+                class="font-semibold text-xl text-zinc-800 dark:text-zinc-100 leading-tight"
             >
                 Dashboard
             </h2>
         </template>
 
         <div class="py-12">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 prose">
+            <div class="max-w-7xl sm:px-6 lg:px-8 prose prose-zinc dark:prose-invert">
                 <div
-                    class="bg-indigo-100 dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg mb-4"
+                    class="bg-primary-50 dark:bg-primary-900 overflow-hidden shadow-sm sm:rounded-lg mb-4"
                 >
                     <CreateQrCode />
                 </div>
                 <div
-                    class="bg-white dark:bg-gray-900 overflow-hidden shadow-sm sm:rounded-lg"
+                    class="bg-white dark:bg-zinc-900 overflow-hidden shadow-sm sm:rounded-lg"
                 >
                     <div
-                        class="p-6 bg-indigo-100 dark:bg-gray-800 dark:text-gray-100 border-b border-gray-200 dark:border-gray-800 flex flex-wrap justify-center sm:justify-around"
+                        class="p-6 bg-secondary-50 dark:bg-secondary-900 border-b border-gray-200 dark:border-gray-800 flex flex-wrap justify-center sm:justify-around"
                     >
                         <div
                             v-for="link in user.links"
                             :key="link.id"
-                            class="flex justify-center dark:bg-gray-900 rounded-3xl p-4 m-4"
+                            class="flex justify-center rounded-3xl p-4 m-4"
                         >
                             <QrCodeManager :link="link"></QrCodeManager>
                         </div>

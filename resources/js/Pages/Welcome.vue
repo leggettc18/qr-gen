@@ -1,7 +1,7 @@
 <script setup lang="ts">
     import { Head, Link, usePage } from '@inertiajs/inertia-vue3';
     import BreezeButton from '../Components/Button.vue';
-    import BreezeInput from '../Components/Input.vue';
+    import BreezeInput from '../Components/DebouncedInput.vue';
     import RegisterForm from '@/Components/Forms/Register.vue';
     import { DownloadIcon } from '@heroicons/vue/solid';
     import { computed, ref } from 'vue';
@@ -18,15 +18,11 @@
     }
 
     const user = computed(() => usePage<IPageProps>().props.value.auth.user);
-    var qrlinknew = ref('');
+    var qrlink = ref('');
 
     const form = ref({
-        url: '',
+        url: computed(() => `${qrlink.value === '' ? '' : 'https://'}` + qrlink.value),
     });
-
-    const updateQrLink = () => {
-        form.value.url = 'https://' + qrlinknew.value;
-    };
 
     const imageUrl = ref('');
     const onReady = (canvas: HTMLCanvasElement) => {
@@ -56,7 +52,7 @@
     <Head title="Welcome" />
 
     <div
-        class="flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0 min-w-full"
+        class="flex items-top justify-center min-h-screen sm:items-center sm:pt-0 min-w-full"
     >
         <div
             v-if="canLogin"
@@ -66,7 +62,7 @@
                 v-if="user"
                 :href="route('dashboard')"
                 method="get"
-                class="text-sm text-gray-700 dark:text-gray-500 underline"
+                class="text-sm text-zinc-700 dark:text-zinc-500 underline"
                 as="button"
                 >Dashboard</Link
             >
@@ -75,7 +71,7 @@
                 v-if="user"
                 :href="route('logout')"
                 method="post"
-                class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline"
+                class="ml-4 text-sm text-zinc-700 dark:text-zinc-500 underline"
                 as="button"
                 >Log Out</Link
             >
@@ -83,7 +79,7 @@
             <template v-else>
                 <Link
                     :href="route('login')"
-                    class="text-sm text-gray-700 dark:text-gray-500 underline"
+                    class="text-sm text-zinc-700 dark:text-zinc-500 underline"
                     as="button"
                     >Log in</Link
                 >
@@ -91,34 +87,34 @@
                 <Link
                     v-if="canRegister"
                     :href="route('register')"
-                    class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline"
+                    class="ml-4 text-sm text-zinc-700 dark:text-zinc-500 underline"
                     as="button"
                     >Register</Link
                 >
             </template>
         </div>
 
-        <div class="prose flex flex-col items-center min-w-full">
-            <h1 class="dark:text-gray-200">QR Gen</h1>
+        <div class="prose prose-zinc dark:prose-invert flex flex-col items-center min-w-full">
+            <h1>QR Gen</h1>
             <div
                 v-if="user"
-                class="dark:bg-gray-800 dark:text-gray-200 mt-8 p-4 rounded"
+                class="dark:bg-primary-800 mt-8 p-4 rounded"
             >
                 Manage your saved links from your
                 <Link
                     :href="route('dashboard')"
                     method="get"
                     as="button"
-                    class="dark:bg-gray-900 bg-gray-300 rounded p-2 hover:bg-gray-900 hover:dark:bg-gray-800 hover:text-gray-200 transition ease"
+                    class="dark:bg-zinc-900 bg-zinc-300 rounded p-2 hover:bg-zinc-900 hover:dark:bg-zinc-800 hover:text-zinc-200 transition ease"
                     >Dashboard</Link
                 >
             </div>
             <div class="flex flex-col lg:flex-row justify-around min-w-full">
                 <div class="flex flex-col lg:flex-row">
                     <div
-                        class="flex flex-col bg-gray-200 dark:bg-gray-800 h-full items-center sm:p-6 lg:p-8 rounded m-4 p-4 space-y-3"
+                        class="flex flex-col bg-primary-50 dark:bg-primary-900 h-full items-center sm:p-6 lg:p-8 rounded m-4 p-4 space-y-3"
                     >
-                        <h2 class="dark:text-gray-200">
+                        <h2>
                             {{
                                 user
                                     ? 'Generate a QR Code'
@@ -128,17 +124,11 @@
                         <div class="flex justify-end flex-wrap space-x-2">
                             <div class="flex items-center">
                                 <span
-                                    class="bg-gray-300 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded p-2"
+                                    class="bg-primary-100 dark:bg-primary-700 text-zinc-900 dark:text-zinc-200 rounded p-2"
                                     >https://</span
                                 >
                             </div>
-                            <BreezeInput type="text" v-model="qrlinknew" />
-                            <BreezeButton
-                                type="button"
-                                @click="updateQrLink()"
-                                class="mt-2 md:mt-0"
-                                >Update</BreezeButton
-                            >
+                            <BreezeInput type="text" v-model="qrlink" />
                         </div>
                         <div
                             v-if="form.url != ''"
@@ -151,7 +141,7 @@
                                 class="border-4 border-gray-600 rounded h-full m-0"
                             />
                             <button
-                                class="bg-emerald-500 text-gray-100 rounded p-2"
+                                class="bg-emerald-500 text-zinc-100 rounded p-2"
                                 @click="share"
                             >
                                 <DownloadIcon class="h-5 w-5" />
@@ -159,11 +149,11 @@
                         </div>
                     </div>
                     <div
-                        class="h-full sm:p-6 lg:p-8 bg-gray-200 dark:bg-gray-800 rounded m-4 p-4"
+                        class="h-full sm:p-6 lg:p-8 bg-secondary-50 dark:bg-secondary-800 rounded m-4 p-4"
                         v-if="!user"
                     >
                         <div class="flex flex-col space-y-5 items-center">
-                            <h2 class="dark:text-gray-200">
+                            <h2>
                                 ...or Register to save your QR Code for later
                             </h2>
                             <RegisterForm />

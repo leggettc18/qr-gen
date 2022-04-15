@@ -61,7 +61,7 @@
 <template>
     <div class="flex flex-col md:flex-row">
         <div class="flex flex-col items-center m-4">
-            <h2 class="dark:text-gray-200 m-1">
+            <h2 class="m-1">
                 {{ link.name }}
             </h2>
             <VueQrcode
@@ -72,19 +72,19 @@
             />
             <div class="flex space-x-2 m-2">
                 <button
-                    class="bg-blue-500 text-gray-100 rounded p-2"
+                    class="bg-secondary-500 text-zinc-100 rounded p-2"
                     @click="showEdit = !showEdit"
                 >
                     <PencilIcon class="h-5 w-5" />
                 </button>
                 <button
-                    class="bg-emerald-500 text-gray-100 rounded p-2"
+                    class="bg-primary-500 text-zinc-100 rounded p-2"
                     @click="share"
                 >
                     <DownloadIcon class="h-5 w-5" />
                 </button>
                 <button
-                    class="bg-red-500 text-gray-100 rounded p-2"
+                    class="bg-error-500 text-zinc-100 rounded p-2"
                     @click="destroy"
                 >
                     <TrashIcon class="h-5 w-5" />
@@ -112,7 +112,7 @@
                     />
                 </div>
                 <div class="mt-4">
-                    <BreezeButton type="submit">Update</BreezeButton>
+                    <BreezeButton type="submit" class="bg-secondary-700 hover:bg-secondary-500">Update</BreezeButton>
                 </div>
             </form>
         </div>

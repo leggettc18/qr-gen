@@ -6,20 +6,22 @@
     import route from 'ziggy-js';
     import { useForm } from '@inertiajs/inertia-vue3';
     import { ref } from 'vue';
+    import { computed } from '@vue/reactivity';
+
+    const qrlink = ref('');
 
     const form = useForm({
-        url: '',
+        url: computed(() => `${qrlink.value === '' ? '' : 'https://'}` + qrlink.value),
         name: '',
     });
 
     const postLink = () => {
-        form.url = 'https://' + form.url
         form.post(route('link.store'), {
             onFinish: () => {
-                form.reset('url');
                 form.reset('name');
-                form.url = '';
+                form.reset('url');
                 form.name = '';
+                qrlink.value = ''
             },
         });
     };
@@ -27,26 +29,26 @@
 
 <template>
     <div
-        class="flex flex-col dark:bg-gray-800 h-full items-center sm:p-6 lg:p-8 rounded m-4 p-4 space-y-3"
+        class="flex flex-col h-full items-center sm:p-6 lg:p-8 rounded p-4 space-y-3"
     >
-        <h2 class="dark:text-gray-200">Generate a QR Code</h2>
+        <h2 class="dark:text-zinc-200">Generate a QR Code</h2>
         <div class="flex flex-wrap space-x-2">
             <div class="flex items-center">
                 <span
-                    class="bg-indigo-200 dark:bg-gray-700 text-gray-900 dark:text-gray-200 rounded p-2"
+                    class="bg-primary-100 dark:bg-primary-700 text-zinc-900 dark:text-zinc-200 rounded p-2"
                     >https://</span
                 >
             </div>
-            <BreezeInput type="text" v-model="form.url" />
+            <BreezeInput type="text" v-model="qrlink" />
         </div>
         <div class="h-1/3">
             <VueQrcode
                 v-if="form.url != ''"
-                :value="form.url"
+                value="form.url"
                 class="border-4 border-gray-600 rounded h-full m-0"
             />
         </div>
-        <div v-if="form.url != ''" class="flex space-x-2 w-fit justify-center">
+        <div v-if="form.url != ''">
             <form @submit.prevent="postLink">
                 <BreezeLabel for="name" value="Name" />
                 <BreezeInput
@@ -55,9 +57,7 @@
                     v-model="form.name"
                     required
                 />
-                <BreezeButton
-                    type="submit"
-                    class="bg-indigo-900"
+                <BreezeButton type="submit" class="bg-primary-700 hover:bg-primary-500 ml-2"
                     >Save</BreezeButton
                 >
             </form>

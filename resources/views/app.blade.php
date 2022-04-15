@@ -25,7 +25,7 @@
             <script type="module" src="http://localhost:3030/resources/js/app.ts"></script>
         @endproduction
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-zinc-100 dark:bg-black">
         @inertia
     </body>
 </html>

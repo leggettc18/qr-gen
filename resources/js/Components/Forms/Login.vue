@@ -1,34 +1,36 @@
 <script lang="ts" setup>
-import BreezeButton from '@/Components/Button.vue';
-import BreezeCheckbox from '@/Components/Checkbox.vue';
-import BreezeInput from '@/Components/Input.vue';
-import BreezeLabel from '@/Components/Label.vue';
-import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
-import { Link, useForm } from '@inertiajs/inertia-vue3';
-import route from 'ziggy-js';
+    import BreezeButton from '@/Components/Button.vue';
+    import BreezeCheckbox from '@/Components/Checkbox.vue';
+    import BreezeInput from '@/Components/Input.vue';
+    import BreezeLabel from '@/Components/Label.vue';
+    import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
+    import { Link, useForm } from '@inertiajs/inertia-vue3';
+    import route from 'ziggy-js';
 
-defineProps({
-    canResetPassword: Boolean,
-    status: String,
-});
-
-const form = useForm({
-    email: '',
-    password: '',
-    remember: false
-});
-
-const submit = () => {
-    form.post(route('login'), {
-        onFinish: () => form.reset('password'),
+    defineProps({
+        canResetPassword: Boolean,
+        status: String,
     });
-};
+
+    const form = useForm({
+        email: '',
+        password: '',
+        remember: false,
+    });
+
+    const submit = () => {
+        form.post(route('login'), {
+            onFinish: () => form.reset('password'),
+        });
+    };
 </script>
 
 <template>
     <BreezeValidationErrors class="mb-4" />
 
-    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">{{ status }}</div>
+    <div v-if="status" class="mb-4 font-medium text-sm text-green-600">
+        {{ status }}
+    </div>
 
     <form @submit.prevent="submit">
         <div>
@@ -58,8 +60,13 @@ const submit = () => {
 
         <div class="block mt-4">
             <label class="flex items-center">
-                <BreezeCheckbox name="remember" v-model:checked="form.remember" />
-                <span class="ml-2 text-sm text-gray-600 dark:text-gray-400">Remember me</span>
+                <BreezeCheckbox
+                    name="remember"
+                    v-model:checked="form.remember"
+                />
+                <span class="ml-2 text-sm text-zinc-600 dark:text-zinc-400"
+                    >Remember me</span
+                >
             </label>
         </div>
 
@@ -67,15 +74,17 @@ const submit = () => {
             <Link
                 v-if="canResetPassword"
                 :href="route('password.request')"
-                class="underline text-sm text-gray-600 hover:text-gray-900"
-            >Forgot your password?</Link>
+                class="underline text-sm text-zinc-600 hover:text-zinc-900"
+                >Forgot your password?</Link
+            >
 
             <BreezeButton
                 type="submit"
-                class="ml-4"
+                class="ml-4 bg-primary-700 hover:bg-primary-500 dark:bg-primary-900 dark:hover:bg-primary-700"
                 :class="{ 'opacity-25': form.processing }"
                 :disabled="form.processing"
-            >Log in</BreezeButton>
+                >Log in</BreezeButton
+            >
         </div>
     </form>
 </template>
