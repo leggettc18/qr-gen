@@ -5,13 +5,17 @@
     import BreezeLabel from '@/Components/Label.vue';
     import route from 'ziggy-js';
     import { useForm } from '@inertiajs/inertia-vue3';
-    import { ref } from 'vue';
+    import { ref, watch } from 'vue';
     import { computed } from '@vue/reactivity';
 
     const qrlink = ref('');
 
+    watch(qrlink, (value) => {
+        form.url = `${qrlink.value === '' ? '' : 'https://'}` + value;
+    })
+
     const form = useForm({
-        url: computed(() => `${qrlink.value === '' ? '' : 'https://'}` + qrlink.value),
+        url: '',
         name: '',
     });
 
@@ -44,7 +48,7 @@
         <div class="h-1/3">
             <VueQrcode
                 v-if="form.url != ''"
-                value="form.url"
+                :value="form.url"
                 class="border-4 border-gray-600 rounded h-full m-0"
             />
         </div>
