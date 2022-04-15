@@ -1,5 +1,5 @@
 <script setup lang="ts">
-    import { onMounted, ref } from 'vue';
+    import { onMounted, ref, onBeforeUnmount } from 'vue';
     import { debounce } from '@/Helpers';
 
     defineProps(['modelValue']);
@@ -12,12 +12,16 @@
         if (target) {
             emit('update:modelValue', (target as HTMLInputElement).value);
         }
-    }, 600)[0];
+    }, 600);
 
     onMounted(() => {
         if (input.value?.hasAttribute('autofocus')) {
             input.value.focus();
         }
+    });
+
+    onBeforeUnmount(() => {
+        handleInput.cancel();
     });
 </script>
 

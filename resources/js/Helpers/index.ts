@@ -6,20 +6,17 @@ interface FunctionWithArguments {
 
 // Provides an interface to a Generic DeboucedFunction Type, which takes
 // any function and wraps its return type in a Promise.
-interface DebouncedFunction<F extends FunctionWithArguments> { (...args: Parameters<F>): Promise<ReturnType<F>>; }
-
-// Provides an interface for a generic DebouceReturn type, which returns
-// an array containing the DebouncedFunction (derived from the 
-// FunctionWithArguments that was supplied), and the teardown function
-// (which has no arguments and does not return anything).
-interface DebounceReturn<F extends FunctionWithArguments> extends Array<DebouncedFunction<F> | (() => void)> {
-    0: (...args: Parameters<F>) => Promise<ReturnType<F>>;
-    1: () => void;
+interface DebouncedFunction<F extends FunctionWithArguments> {
+    (...args: Parameters<F>): Promise<ReturnType<F>>;
+    cancel: () => void;
 }
 
 // Takes a callback function and returns another function which runs the same
 // function after a delay (specified by timeout) and returns the value wrapped in a Promise.
-export const debounce: (<F extends FunctionWithArguments>(callback: F, timeout: number) => DebounceReturn<F>) = <F extends FunctionWithArguments>(callback: F, timeout: number) => {
+export const debounce = <F extends FunctionWithArguments>(
+    callback: F,
+    timeout: number,
+): DebouncedFunction<F> => {
     let timer: ReturnType<typeof setTimeout>;
 
     const debouncedFunc: DebouncedFunction<F> = (...args) =>
@@ -29,10 +26,10 @@ export const debounce: (<F extends FunctionWithArguments>(callback: F, timeout: 
             }
 
             timer = setTimeout(() => {
-                resolve(callback(...args as unknown[]));
+                resolve(callback(...(args as unknown[])));
             }, timeout);
         });
-    const teardown = () => clearTimeout(timer);
+    debouncedFunc.cancel = () => clearTimeout(timer);
 
-    return [debouncedFunc, teardown];
-}
+    return debouncedFunc;
+};
